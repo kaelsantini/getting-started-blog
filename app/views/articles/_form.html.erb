@@ -1,3 +1,5 @@
+<%  disable_form = controller.action_name == 'show' %>
+
 <div class="row">
   <div class="col-md-12">
   <%= form_with model: @article, local: true do |form| %>
@@ -18,16 +20,16 @@
 
     <div class="form-group">
       <%= form.label :title %><br>
-      <%= form.text_field :title, class: "form-control", disabled: @disable_form %>
+      <%= form.text_field :title, class: "form-control", disabled: disable_form %>
     </div>
 
     <div class="form-group">
       <%= form.label :text %><br>
-      <%= form.text_area :text, class: "form-control", disabled: @disable_form, rows: "3" %>
+      <%= form.text_area :text, class: "form-control", disabled: disable_form, rows: "3" %>
     </div>
 
     <p>
-      <%= form.submit class: "btn btn-primary", disabled: @disable_form %>
+      <%= form.submit class: "btn btn-primary", disabled: disable_form %>
     </p>
 
   <% end %>

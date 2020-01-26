@@ -7,11 +7,11 @@ class ArticlesController < ApplicationController
 
     def show
         @article = Article.find(params[:id])
-        @disable_form = true;
     end
 
     def new
         @article = Article.new
+        render 'edit'
     end
 
     def edit

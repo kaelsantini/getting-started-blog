@@ -6,9 +6,11 @@
       <h1>Show Article</h1>
       <div class="row">
         <div class="col-md-12 text-right">
-          <%= link_to 'Edit', edit_article_path(@article), class: "btn btn-secondary" %>
+          <%= link_to edit_article_path(@article), class: "btn btn-secondary" do %>
+            <i class="material-icons">edit</i>Back
+          <% end %>
           <%= link_to articles_path, class: "btn btn-primary" do %>
-            <i class="material-icons">keyboard_arrow_left</i>Back
+            <i class="material-icons">arrow_back</i>Back
           <% end %>
         </div>
       </div>

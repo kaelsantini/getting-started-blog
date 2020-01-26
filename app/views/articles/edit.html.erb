@@ -6,9 +6,7 @@
       <h1><%= controller.action_name == 'new' ? 'New Article' : 'Edit Article'  %></h1>
       <div class="row">
         <div class="col-md-12 text-right">
-          <%= link_to articles_path, class: "btn btn-primary" do %>
-            <i class="material-icons">arrow_back</i>Back
-          <% end %>
+          <%= render 'components/back_button', link: articles_path %>
         </div>
       </div>
 

@@ -4,7 +4,6 @@ class ArticlesController < ApplicationController
         @articles = Article.all
     end
 
-
     def show
         @article = Article.find(params[:id])
     end
@@ -21,20 +20,26 @@ class ArticlesController < ApplicationController
     def create
         @article = Article.new(article_params)
 
-        if @article.save
-            redirect_to @article
-        else
-            render 'new'
-        end
-
+        respond_to do |format|
+         if @article.save
+           format.html { redirect_to @article }
+           format.json { render json: @article, status: :created, location: @article }
+         else
+           format.json { render json: @article.errors, status: :unprocessable_entity }
+         end
+       end
     end
 
     def update
         @article = Article.find(params[:id])
-        if (@article.update(article_params))
-            redirect_to @article
-        else
-            render 'edit'
+
+        respond_to do |format|
+          if @article.update(article_params)
+            format.html { redirect_to @article }
+            format.json { render json: @article, status: :created, location: @article }
+          else
+            format.json { render json: @article.errors, status: :unprocessable_entity }
+          end
         end
     end
 

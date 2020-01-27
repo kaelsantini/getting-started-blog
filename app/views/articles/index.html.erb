@@ -26,6 +26,9 @@
             </tr>
           </thead>
           <tbody>
+            <% if @articles.any? == false %>
+              <tr><td>No Articles</td></tr>
+            <% end %>
             <% @articles.each do |article| %>
               <tr>
                 <td><%= article.id %></td>

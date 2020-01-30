@@ -1,5 +1,4 @@
 $.fn.clear_form_errors = function() {
-
   this.find(".is-invalid").removeClass("is-invalid");
   this.find("div.invalid-feedback").remove();
 };

@@ -4,20 +4,6 @@
   <div class="col-md-12">
   <%= form_with model: @article do |form| %>
 
-    <% if @article.errors.any? %>
-      <div id="error_explanation">
-        <h2>
-          <%= pluralize(@article.errors.count, "error") %> prohibited
-          this article from being saved:
-        </h2>
-        <ul>
-          <% @article.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
     <div class="form-group">
       <%= form.label :title %>
       <%= form.text_field :title, class: "form-control", disabled: disable_form %>

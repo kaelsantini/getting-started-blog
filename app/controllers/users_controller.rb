@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
      if @user.save
-       format.json { render json: @user, status: :created, location: @user }
+       format.html { redirect_to users_path }
      else
        format.json { render json: @user.errors, status: :unprocessable_entity }
      end

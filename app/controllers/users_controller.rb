@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.email.downcase!
 
     respond_to do |format|
      if @user.save
@@ -28,7 +29,7 @@ class UsersController < ApplicationController
 
   private
       def user_params
-          params.require(:user).permit(:name, :email, :password_digest)
+          params.require(:user).permit(:name, :email, :password)
       end
 
 end

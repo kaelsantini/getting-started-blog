@@ -5,6 +5,7 @@ $.fn.clear_form_errors = function() {
 
 $.fn.render_form_errors = function(model_name, errors){
   _form = this;
+  model_name = model_name ? model_name : "";
   this.clear_form_errors();
 
   $.each(errors, function(field, messages){
@@ -27,7 +28,8 @@ $(document).on("turbolinks:load", function(){
   $("form")
     .on("ajax:success", function(data, status, xhr){
   }).on("ajax:error", function(ev){
-        $(this).render_form_errors("article", ev.detail[0]);
+      _model = $(this).attr("model");
+        $(this).render_form_errors(_model, ev.detail[0]);
   });
 
 });

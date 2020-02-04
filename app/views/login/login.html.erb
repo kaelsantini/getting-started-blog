@@ -30,7 +30,7 @@
         <% end %>
 
         <% flash.each do |type, msg| %>
-            <div class="alert alert-warning my-2 text-center" role="alert">
+            <div id="errorMessage" class="alert alert-warning my-2 text-center" role="alert">
               <i class="fas fa-exclamation-triangle"></i> <%= msg %>
             </div>
         <% end %>

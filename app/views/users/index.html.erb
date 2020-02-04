@@ -44,6 +44,17 @@
                 </div>
 
                 <div class="form-group row">
+                  <%= label_tag :begin_date, "Birth date start", class: "col-sm-2 col-form-label" %>
+                  <div class="col-sm-3">
+                    <%= date_field_tag :begin_date, params[:begin_date], class: "form-control" %>
+                  </div>
+                  <%= label_tag :end_date, "Birth date end", class: "col-sm-2 col-form-label" %>
+                  <div class="col-sm-3">
+                    <%= date_field_tag :end_date, params[:end_date], class: "form-control" %>
+                  </div>
+                </div>
+
+                <div class="form-group row">
                     <div class="col-sm-12 text-right">
                       <%= button_tag name: nil, type: "submit", class: "btn btn-primary" do %>
                         <i class="fas fa-search"></i> Search

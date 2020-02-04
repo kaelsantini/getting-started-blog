@@ -5,6 +5,16 @@ class UsersController < ApplicationController
     @users = @users.where("name LIKE ?", "%#{params[:name]}%") if params[:name].present?
     @users = @users.where("email LIKE ?", "%#{params[:email]}%") if params[:email].present?
     @users = @users.where(gender: params[:gender]) if params[:gender].present?
+    if params[:begin_date].present? && params[:end_date].present?
+      @users = @users.where("birth_date BETWEEN ? and ?", params[:begin_date], params[:end_date])
+    else
+      if params[:begin_date].present?
+          @users = @users.where("birth_date >= ?", params[:begin_date])
+      end
+      if params[:end_date].present?
+          @users = @users.where("birth_date <= ?", params[:end_date])
+      end
+    end
   end
 
   def new

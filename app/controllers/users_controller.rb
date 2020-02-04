@@ -2,18 +2,35 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @users = @users.where("name LIKE ?", "%#{params[:name]}%") if params[:name].present?
+    @users = @users.where("email LIKE ?", "%#{params[:email]}%") if params[:email].present?
+    @users = @users.where(gender: params[:gender]) if params[:gender].present?
   end
 
   def new
     @user = User.new
+    render 'edit'
+  end
+
+  def edit
+      @user = User.find(params[:id])
   end
 
   def create
     @user = User.new(user_params)
-    @user.email.downcase!
-
     respond_to do |format|
      if @user.save
+       format.html { redirect_to users_path }
+     else
+       format.json { render json: @user.errors, status: :unprocessable_entity }
+     end
+   end
+  end
+
+  def update
+    @user = User.find(params[:id])
+    respond_to do |format|
+     if @user.update(user_params)
        format.html { redirect_to users_path }
      else
        format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -29,7 +46,6 @@ class UsersController < ApplicationController
 
   private
       def user_params
-          params.require(:user).permit(:name, :email, :password)
+          params.require(:user).permit(:name, :email, :birth_date, :gender, :password, :password_confirmation)
       end
-
 end

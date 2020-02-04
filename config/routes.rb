@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   post '/login', to: 'login#do_login'
   get '/logout', to: 'login#logout'
 
-  resources :users, only: [:index, :new, :create, :destroy]
+  resources :users
 
   resources :articles do
     resources :comments

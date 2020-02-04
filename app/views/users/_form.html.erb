@@ -1,26 +1,39 @@
-<div class="row">
-  <div class="col-md-12">
+
   <%= form_with model: @user do |form| %>
 
-    <div class="form-group">
-      <%= form.label :name %>
-      <%= form.text_field :name, class: "form-control" %>
-    </div>
+  <div class="form-row">
+      <div class="form-group col-md-6">
+        <%= form.label :name %>
+        <%= form.text_field :name, class: "form-control", autofocus: true %>
+      </div>
+      <div class="form-group col-md-6">
+        <%= form.label :email %>
+        <%= form.text_field :email, class: "form-control" %>
+      </div>
+  </div>
+  <div class="form-row">
+      <div class="form-group col-md-6">
+        <%= form.label :birth_date, 'Birth date' %>
+        <%= form.date_field :birth_date, class: "form-control" %>
+      </div>
+      <div class="form-group col-md-6">
+        <%= form.label :gender, 'Gender' %>
+        <%= form.select(:gender, [['--Please select--', nil], ['Female', 'F'], ['Male', 'M'], ['Other', 'O']], {}, { :class => "form-control" }) %>
+      </div>
+  </div>
+  <div class="form-row">
+      <div class="form-group col-md-6">
+        <%= form.label :password, 'Password' %>
+        <%= form.password_field :password, class: "form-control" %>
+      </div>
+      <div class="form-group col-md-6">
+        <%= form.label :password_confirmation, 'Confirm password' %>
+        <%= form.password_field :password_confirmation, class: "form-control" %>
+      </div>
+  </div>
 
-    <div class="form-group">
-      <%= form.label :email %>
-      <%= form.text_field :email, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= form.label :password, 'Password' %>
-      <%= form.password_field :password, class: "form-control" %>
-    </div>
-
-    <p>
-      <%= form.submit class: "btn btn-primary", data: { "disable-with":"Saving..." } %>
-    </p>
+  <div class="text-right">
+    <%= form.submit class: "btn btn-primary", data: { "disable-with":"Saving..." } %>
+  </div>
 
   <% end %>
-  </div>
-</div>

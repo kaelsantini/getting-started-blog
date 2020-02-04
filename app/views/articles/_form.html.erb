@@ -6,7 +6,7 @@
 
     <div class="form-group">
       <%= form.label :title %>
-      <%= form.text_field :title, class: "form-control", disabled: disable_form %>
+      <%= form.text_field :title, class: "form-control", disabled: disable_form, autofocus: true %>
     </div>
 
     <div class="form-group">
@@ -14,9 +14,9 @@
       <%= form.text_area :text, class: "form-control", disabled: disable_form, rows: "3" %>
     </div>
 
-    <p>
-      <%= form.submit class: "btn btn-primary", data: { "disable-with":"Saving..." },disabled: disable_form %>
-    </p>
+    <div class="text-right">
+      <%= form.submit class: "btn btn-primary", data: { "disable-with":"Saving..." }, disabled: disable_form %>
+    </div>
 
   <% end %>
   </div>

@@ -10,6 +10,7 @@ require("channels")
 
 require("bootstrap/dist/js/bootstrap")
 
+require("custom/application")
 require("custom/forms")
 require("custom/login")
 

@@ -25,9 +25,7 @@ $.fn.render_form_errors = function(model_name, errors){
 
 $(document).on("turbolinks:load", function(){
 
-  $("form")
-    .on("ajax:success", function(data, status, xhr){
-  }).on("ajax:error", function(ev){
+  $("form").on("ajax:error", function(ev){
       _model = $(this).attr("model");
         $(this).render_form_errors(_model, ev.detail[0]);
   });

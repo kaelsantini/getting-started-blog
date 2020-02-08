@@ -1,3 +1,4 @@
+<%= javascript_pack_tag "users_index" %>
 <%= render "shared/header" %>
 
 <main role="main">
@@ -6,7 +7,7 @@
       <h1>Listing Users</h1>
       <div class="row">
         <div class="col-md-12 text-right">
-          <%= link_to new_user_path, class: "btn btn-primary" do %>
+          <%= link_to new_user_path, class: "btn btn-primary", autofocus: true do %>
             <i class="fas fa-plus"></i> New User
           <% end %>
           <button class="btn btn-secondary <%= params[:name] ? "" : "collapsed" %>" type="button" data-toggle="collapse" data-target="#searchForm" aria-expanded="false" aria-controls="searchForm" alt="Search Form">
@@ -22,7 +23,7 @@
           <div class="<%= params[:name] ? "show" : "collapse" %> mt-1 shadow-sm" id="searchForm">
             <div class="card card-body">
 
-              <%= form_tag(users_path, method: :get) do %>
+              <%= form_with url: users_path, local: true, method: :get do %>
 
                 <div class="form-group row">
                   <%= label_tag :name, "Name", class: "col-sm-2 col-form-label" %>
@@ -74,14 +75,14 @@
 
         <table class="table">
           <thead>
-          <tr>
-              <th scope="col" class="border-top-0">ID</th>
-              <th scope="col" class="border-top-0">Name</th>
-              <th scope="col" class="border-top-0">E-mail</th>
-              <th scope="col" class="border-top-0">Birth Date</th>
-              <th scope="col" class="border-top-0">Gender</th>
-              <th scope="col" class="border-top-0"></th>
-              <th scope="col" class="border-top-0"></th>
+            <tr>
+              <th scope="col" class="border-top-0" col="id">ID</th>
+              <th scope="col" class="border-top-0" col="name">Name</th>
+              <th scope="col" class="border-top-0" col="email">E-mail</th>
+              <th scope="col" class="border-top-0" col="birth_date">Birth Date</th>
+              <th scope="col" class="border-top-0" col="gender">Gender</th>
+              <th scope="col" class="border-top-0" col="act1"></th>
+              <th scope="col" class="border-top-0" col="act2"></th>
             </tr>
           </thead>
           <tbody>

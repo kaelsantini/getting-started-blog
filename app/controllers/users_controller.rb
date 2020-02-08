@@ -2,8 +2,8 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    @users = @users.where("name LIKE ?", "%#{params[:name]}%") if params[:name].present?
-    @users = @users.where("email LIKE ?", "%#{params[:email]}%") if params[:email].present?
+    @users = @users.where("lower(name) LIKE lower(?)", "%#{params[:name]}%") if params[:name].present?
+    @users = @users.where("lower(email) LIKE lower(?)", "%#{params[:email]}%") if params[:email].present?
     @users = @users.where(gender: params[:gender]) if params[:gender].present?
     if params[:begin_date].present? && params[:end_date].present?
       @users = @users.where("birth_date BETWEEN ? and ?", params[:begin_date], params[:end_date])
@@ -15,6 +15,12 @@ class UsersController < ApplicationController
           @users = @users.where("birth_date <= ?", params[:end_date])
       end
     end
+    puts @users.length
+    respond_to do |format|
+      format.html
+      format.json
+    end
+
   end
 
   def new

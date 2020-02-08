@@ -1,0 +1,11 @@
+<% flash.each do |type, msg| %>
+
+  <div aria-live="polite" aria-atomic="true" style="position: relative;">
+    <div class="toast" style="position: absolute; top: 15px; right: 30px;">
+      <div class="toast-body">
+        <%= msg %>
+      </div>
+    </div>
+  </div>
+
+<% end %>

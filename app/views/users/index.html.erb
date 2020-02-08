@@ -12,7 +12,7 @@
           <button class="btn btn-secondary <%= params[:name] ? "" : "collapsed" %>" type="button" data-toggle="collapse" data-target="#searchForm" aria-expanded="false" aria-controls="searchForm" alt="Search Form">
             <i class="fas fa-search"></i>
           </button>
-          <%= render 'components/back_button', link: root_path %>
+          <%= render 'shared/back_button', link: root_path %>
         </div>
       </div>
 

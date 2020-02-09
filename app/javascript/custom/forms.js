@@ -3,7 +3,7 @@ $.fn.clear_form_errors = function() {
   this.find("div.invalid-feedback").remove();
 };
 
-$.fn.render_form_errors = function(model_name, errors){
+$.fn.render_form_errors = function(model_name, errors) {
   _form = this;
   model_name = model_name ? model_name : "";
   this.clear_form_errors();
@@ -23,11 +23,40 @@ $.fn.render_form_errors = function(model_name, errors){
   });
 };
 
-$(document).on("turbolinks:load", function(){
+$.confirm_dialog = function(title, message, okCallBack, cancelCallBack) {
+  okCallBack = okCallBack ? okCallBack : $.noop;
+  cancelCallBack = cancelCallBack ? cancelCallBack : $.noop;
+
+  var $_modal = $("#modal").modal();
+  $_modal.find("#modalTitle").html(title);
+  $_modal.find(".modal-body").html(message);
+  $_modal.find("#btnModalCancel").unbind().bind("click", function(){
+    cancelCallBack();
+    $_modal.modal("hide");
+    return false;
+  });
+  $_modal.find("#btnModalConfirm").unbind().bind("click", function(){
+    okCallBack();
+    $_modal.modal("hide");
+    return false;
+  });
+  $_modal.modal("show");
+};
+
+$(document).on("turbolinks:load", function() {
 
   $("form").on("ajax:error", function(ev){
-      _model = $(this).attr("model");
-        $(this).render_form_errors(_model, ev.detail[0]);
+    _model = $(this).attr("model");
+    $(this).render_form_errors(_model, ev.detail[0]);
+  });
+
+  $("a.destroy-link").click(function(){
+    var _message = $(this).attr("data-message");
+    var _messageToShow = "This record will be destroyed: <br /><strong>" + _message + "</strong>";
+    $.confirm_dialog("Confirm destroy action", _messageToShow, function(){
+      
+    });
+    return false;
   });
 
 });

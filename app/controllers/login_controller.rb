@@ -14,7 +14,7 @@ class LoginController < ApplicationController
       redirect_to root_path
     else
       flash.notice = 'Invalid email or password'
-      redirect_to '/login'
+      redirect_to :login
     end
 
   end

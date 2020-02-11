@@ -56,9 +56,14 @@ class UsersController < ApplicationController
   end
 
   def destroy
-      @user = User.find(params[:id])
-      @user.destroy
-      redirect_to users_path
+      if params[:id] == session[:user_id]
+        flash.notice = 'You cannot destroy our own user'
+        
+      else
+        @user = User.find(params[:id])
+        @user.destroy
+      end
+
   end
 
   private

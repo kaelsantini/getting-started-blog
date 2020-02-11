@@ -23,20 +23,25 @@ $.fn.render_form_errors = function(model_name, errors) {
   });
 };
 
-$.confirm_dialog = function(title, message, okCallBack, cancelCallBack) {
-  okCallBack = okCallBack ? okCallBack : $.noop;
-  cancelCallBack = cancelCallBack ? cancelCallBack : $.noop;
+$.confirm_dialog = function(options) {
+
+  _options = $.extend({
+    title: "",
+    message: "",
+    okCallBack: $.noop,
+    cancelCallBack: $.noop
+  }, options);
 
   var $_modal = $("#modal").modal();
-  $_modal.find("#modalTitle").html(title);
-  $_modal.find(".modal-body").html(message);
+  $_modal.find("#modalTitle").html(_options.title);
+  $_modal.find(".modal-body").html(_options.message);
   $_modal.find("#btnModalCancel").unbind().bind("click", function(){
-    cancelCallBack();
+    _options.cancelCallBack();
     $_modal.modal("hide");
     return false;
   });
   $_modal.find("#btnModalConfirm").unbind().bind("click", function(){
-    okCallBack();
+    _options.okCallBack();
     $_modal.modal("hide");
     return false;
   });
@@ -51,11 +56,24 @@ $(document).on("turbolinks:load", function() {
   });
 
   $("a.destroy-link").click(function(){
-    var _message = $(this).attr("data-message");
+    var _this = $(this);
+    var _idRowToDestroy = _this.attr("data-row-id");
+    var _message = _this.attr("data-message");
     var _messageToShow = "This record will be destroyed: <br /><strong>" + _message + "</strong>";
-    $.confirm_dialog("Confirm destroy action", _messageToShow, function(){
-      
+    $.confirm_dialog({
+      title: "Confirm destroy action",
+      message: _messageToShow,
+      okCallBack: function() {
+        $.ajax({
+          type: "DELETE",
+          url: _this.attr("href"),
+          success: function(){
+            $("#" + _idRowToDestroy).remove();
+          }
+        });
+      }
     });
+
     return false;
   });
 

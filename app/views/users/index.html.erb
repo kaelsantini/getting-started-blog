@@ -91,14 +91,14 @@
               <tr><td>No Users</td></tr>
             <% end %>
             <% @users.each do |user| %>
-              <tr>
+              <tr id="<%=  'user_' + user.id.to_s %>">
                 <td><%= user.id %></td>
                 <td><%= user.name %></td>
                 <td><%= user.email %></td>
                 <td><%= user.birth_date %></td>
                 <td><%= user.gender %></td>
                 <td><%= link_to 'Edit', edit_user_path(user) %></td>
-                <td><%= link_to 'Destroy', user_path(user), method: :delete, class: "destroy-link", :data => { :'message' => user.name} %></td>
+                <td><%= link_to 'Destroy', user_path(user), method: :delete, class: "destroy-link", :data => { :'method' => 'delete', :'row-id' => 'user_' + user.id.to_s, :'message' => user.name} %></td>
               </tr>
             <% end %>
             </tbody>

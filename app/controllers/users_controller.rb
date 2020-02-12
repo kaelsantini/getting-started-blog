@@ -56,12 +56,12 @@ class UsersController < ApplicationController
   end
 
   def destroy
-      if params[:id] == session[:user_id]
-        flash.notice = 'You cannot destroy our own user'
-        
+      if params[:id].to_s == session[:user_id].to_s
+        render json: { code: :bad_request, message: 'You cannot destroy our own user'}, status: :bad_request
       else
         @user = User.find(params[:id])
         @user.destroy
+        render json: { code: :ok, message: 'Record destroyed'}, status: :ok
       end
 
   end

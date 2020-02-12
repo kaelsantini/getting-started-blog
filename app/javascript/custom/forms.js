@@ -50,6 +50,14 @@ $.confirm_dialog = function(options) {
 
 $(document).on("turbolinks:load", function() {
 
+  $.ajaxSetup({
+    error: function(response) {
+      if ( response && response.responseJSON && response.responseJSON.message ) {
+        $.toast_message({message: response.responseJSON.message});
+      }
+    }
+  });
+
   $("form").on("ajax:error", function(ev){
     _model = $(this).attr("model");
     $(this).render_form_errors(_model, ev.detail[0]);

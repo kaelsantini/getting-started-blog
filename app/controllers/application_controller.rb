@@ -13,10 +13,9 @@ class ApplicationController < ActionController::Base
     end
 
     def authorized
-      true
-      #if !logged_in?
-      #  flash.alert = 'Restrict access area'
-      #  redirect_to '/login'
-      #end
+      if !logged_in?
+        flash.alert = 'Restrict access area'
+        redirect_to '/login'
+      end
     end
 end

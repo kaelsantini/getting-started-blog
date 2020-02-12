@@ -20,7 +20,7 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'bcrypt', '~>3.1.7'
 
-gem 'pg'
+gem 'pg', '~>1.2.2'
 
 # Use Redis adapter to run Action Cable in proils duction
 # gem 'redis', '~> 4.0'

@@ -24,7 +24,6 @@ $.fn.render_form_errors = function(model_name, errors) {
 };
 
 $.confirm_dialog = function(options) {
-
   _options = $.extend({
     title: "",
     message: "",
@@ -68,6 +67,7 @@ $(document).on("turbolinks:load", function() {
     var _idRowToDestroy = _this.attr("data-row-id");
     var _message = _this.attr("data-message");
     var _messageToShow = "This record will be destroyed: <br /><strong>" + _message + "</strong>";
+
     $.confirm_dialog({
       title: "Confirm destroy action",
       message: _messageToShow,
